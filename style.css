@@ -1,0 +1,96 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
+    margin:0;
+    padding:0;
+}
+html,body {
+    margin:0;
+    padding:0;
+}
+
+
+header {
+    width: 100%;
+    height: 10%;
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 24px;
+    background-color: red;
+}
+
+main {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+
+.containerOne {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.containerTwo {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    width: 20%;
+    color: aqua;
+    margin-left: 30px;
+}
+
+/* City with data */
+.currentCity {
+    border: 1px solid black;
+    width: 100%;
+    height: 200px;
+}
+
+.city {
+    text-align: center;
+    margin: 10px auto;
+
+}
+
+.cityData {
+    margin-left: 50px;
+}
+
+.cityData li {
+    margin: 15px auto;
+}
+
+/* serach for a city box */
+
+.citySearch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* five day forecast */
+
+.fiveDayForecast {
+    width: 100%;
+}
+
+.fiveDayForecast h1 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.fiveDay div {
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+}
+
+.fiveDay  {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 70px;
+}

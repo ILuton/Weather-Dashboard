@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Dashboard</title>
+
+    <link href="style.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1 class="header">Weather Dashboard</h1>
+    </header>
+    <main class="main">
+      <div class="containerOne">
+        <section class="currentCity">
+          <h2 class="city">City Here</h2>
+          <ul class="cityData">
+            <li class="temp">Temp:</li>
+            <li class="wind">Wind:</li>
+            <li class="humidity">Humidity:</li>
+            <li class="uvIndex">UV Index:</li>
+          </ul>
+        </section>
+        <section class="fiveDayForecast">
+          <h1>5day</h1>
+          <div class="fiveDay">
+            <div class="dayOne"></div>
+            <div class="dayTwo"></div>
+            <div class="dayThree"></div>
+            <div class="dayDay"></div>
+            <div class="dayFive"></div>
+          </div>
+        </section>
+      </div>
+      <div class="containerTwo">
+        <section class="citySearch">
+          <h2 class="search">Search for a City:</h2>
+          <input class="cityInput" type="text" />
+          <button class="searchBtn">Search</button>
+          <ul class="cityAppend"></ul>
+        </section>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
