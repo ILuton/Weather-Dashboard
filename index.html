@@ -16,15 +16,22 @@
       <div class="containerOne">
         <section class="currentCity">
           <h2 class="city">City Here</h2>
+          <label for="unitDrop">Choose prefered Units:</label>
+
+          <select name="unit" id="unit">
+            <option value="imperial">Imperial</option>
+            <option value="metric">Metric</option>
+            <option value="standard">Standard</option>
+          </select>
           <ul class="cityData">
-            <li class="temp">Temp:</li>
-            <li class="wind">Wind:</li>
-            <li class="humidity">Humidity:</li>
-            <li class="uvIndex">UV Index:</li>
+            <li class="temp">Temp:<span class="tempData"></span></li>
+            <li class="wind">Wind:<span class="windData"></span></li>
+            <li class="humidity">Humidity:<span class="humidityData"></span></li>
+            <li class="uvIndex">UV Index:<span class="uvIndexData"></span></li>
           </ul>
         </section>
         <section class="fiveDayForecast">
-          <h1>5day</h1>
+          <h1>5 Day</h1>
           <div class="fiveDay">
             <div class="dayOne"></div>
             <div class="dayTwo"></div>
