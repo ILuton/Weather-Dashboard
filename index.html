@@ -15,18 +15,14 @@
     <main class="main">
       <div class="containerOne">
         <section class="currentCity">
-          <h2 class="city">City Here</h2>
-          <label for="unitDrop">Choose prefered Units:</label>
+          <h2 class="city"></h2>
 
-          <select name="unit" id="unit">
-            <option value="imperial">Imperial</option>
-            <option value="metric">Metric</option>
-            <option value="standard">Standard</option>
-          </select>
           <ul class="cityData">
             <li class="temp">Temp:<span class="tempData"></span></li>
             <li class="wind">Wind:<span class="windData"></span></li>
-            <li class="humidity">Humidity:<span class="humidityData"></span></li>
+            <li class="humidity">
+              Humidity:<span class="humidityData"></span>
+            </li>
             <li class="uvIndex">UV Index:<span class="uvIndexData"></span></li>
           </ul>
         </section>
@@ -44,7 +40,14 @@
       <div class="containerTwo">
         <section class="citySearch">
           <h2 class="search">Search for a City:</h2>
-          <input class="cityInput" type="text" />
+          <input id="cityInput" type="text" value = "City Name Here"/>
+          <label for="unitDrop">Choose prefered Units:</label>
+
+          <select name="unit" id="unit">
+            <option value="imperial">Imperial</option>
+            <option value="metric">Metric</option>
+            <option value="standard">Standard</option>
+          </select>
           <button class="searchBtn">Search</button>
           <ul class="cityAppend"></ul>
         </section>
