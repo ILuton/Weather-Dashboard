@@ -5,6 +5,7 @@ const windData = document.querySelector(".windData");
 const humidityData = document.querySelector(".humidityData");
 const uvIndexData = document.querySelector(".uvIndexData");
 const cityInput = document.querySelector("#cityInput");
+const citySearch = document.querySelector(".citySearch");
 const units = document.querySelector("#unit");
 const searchBtn = document.querySelector(".searchBtn");
 const dayOneEL = document.querySelector(".dayOne");
@@ -33,6 +34,16 @@ searchBtn.addEventListener("click", function () {
         cityEl.textContent = data.city.name;
         console.log(data.city.name)
 
+
+        localStorage.setItem("city",cityEl.textContent)
+        let getCity = localStorage.getItem("city")
+        let getCityEL = document.createElement("h2")
+
+        getCityEL.textContent = getCity;
+
+        citySearch.appendChild(getCityEL);
+
+
         const oneCallApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&appid=a215cfdcaaef2536002948ba6c285538&units=" + units.value;
 
 
@@ -46,12 +57,6 @@ searchBtn.addEventListener("click", function () {
             windData.textContent = dataTwo.current.wind_speed;
             humidityData.textContent = dataTwo.current.humidity;
             uvIndexData.textContent = dataTwo.current.uvi;
-
-            dayOneEL.children[0].textContent = data.list[0].dt_txt
-
-            dayOneEL.children[1].textContent = "Temp: " + dataTwo.daily[0].temp.day  
-
-            dayOneEL.children[2].textContent = "Wind: " + dataTwo.daily[0].wind_speed
 
             function dayOne () {
 
@@ -122,3 +127,11 @@ searchBtn.addEventListener("click", function () {
       });
 });
 
+// save search to local storage 
+
+let getCity = localStorage.getItem("city")
+        let getCityEL = document.createElement("h2")
+
+        getCityEL.textContent = getCity;
+
+        citySearch.appendChild(getCityEL);

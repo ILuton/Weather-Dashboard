@@ -51,18 +51,23 @@ main {
 .currentCity {
     border: 1px solid black;
     width: 100%;
-    height: 200px;
+    height: 300px;
     margin-right: 50px;
 }
 
 .city {
     text-align: center;
-    margin: 10px auto;
+    margin: 30px auto;
+    font-size: 40px;
 
 }
 
 .cityData {
     margin-left: 50px;
+    margin-top: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    
 }
 
 .cityData li {
@@ -75,15 +80,24 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     margin-right: 40px;
+    height: 300px;
+    font-size: 1.2em;
 }
 
-.search {
+.citySearch input {
+    margin-bottom: 10px;
+}
+
+#unit {
     margin-bottom: 20px;
 }
 
-.cityInput {
+.search {
+    margin-bottom: 10px;
+}
+
+#cityInput {
     margin-bottom: 20px;
 }
 
@@ -98,14 +112,30 @@ main {
     margin-top: 40px;
 }
 
-.fiveDay div {
-    border: 1px solid black;
-    width: 100px;
-    height: 100px;
-}
-
 .fiveDay  {
     display: flex;
     justify-content: space-around;
     margin-top: 70px;
+}
+
+.fiveDay div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+}
+
+div h6 {
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+button {
+    margin-bottom: 30px;
 }
