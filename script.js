@@ -27,14 +27,17 @@ searchBtn.addEventListener("click", function () {
         return response.json();
       })
       .then(function (data) {
-        console.log(data)
 
+
+        // get lat and long to use on second api call
         let latitude = data.city.coord.lat;
         let longitude = data.city.coord.lon;
+
+        // populate searched cities name
         cityEl.textContent = data.city.name;
-        console.log(data.city.name)
+        
 
-
+        // save searched cities to local storage and add to site
         localStorage.setItem("city",cityEl.textContent)
         let getCity = localStorage.getItem("city")
         let getCityEL = document.createElement("h2")
@@ -52,12 +55,15 @@ searchBtn.addEventListener("click", function () {
             return response.json();
           })
           .then(function (dataTwo) {
-                    console.log(dataTwo);
+      
+            //add current weather data to city box
             tempData.textContent = dataTwo.current.temp;
             windData.textContent = dataTwo.current.wind_speed;
             humidityData.textContent = dataTwo.current.humidity;
             uvIndexData.textContent = dataTwo.current.uvi;
 
+
+            //populate 5 ay forcast data
             function dayOne () {
 
               dayOneEL.children[0].textContent = data.list[3].dt_txt
@@ -135,3 +141,4 @@ let getCity = localStorage.getItem("city")
         getCityEL.textContent = getCity;
 
         citySearch.appendChild(getCityEL);
+        
