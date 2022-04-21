@@ -17,43 +17,62 @@
         <section class="currentCity">
           <h2 class="city">Your City</h2>
 
-          <ul class="cityData">
-            <li class="temp">Temp: <span class="tempData"></span></li>
-            <li class="wind">Wind: <span class="windData"></span></li>
-            <li class="humidity">
-              Humidity: <span class="humidityData"></span>
-            </li>
-            <li class="uvIndex">UV Index: <span class="uvIndexData"></span></li>
-          </ul>
+          <div class="citydataContainer">
+            <ul class="cityData">
+              <li class="temp">Current Temp: <span class="tempData"></span></li>
+              <li class="temp">High Temp: <span class="tempDataMax"></span></li>
+              <li class="wind">Wind: <span class="windData"></span></li>
+              <li class="humidity">
+                Humidity: <span class="humidityData"></span>
+              </li>
+              <li class="uvIndex">
+                UV Index: <span class="uvIndexData"></span>
+              </li>
+            </ul>
+            <div class="weatherIconCon">
+              <img class="weatherIcon" src="">
+              <p class="weatherDes"></p>
+            </div>
+          </div>
         </section>
         <section class="fiveDayForecast">
           <h1>5 Day Future Forecast</h1>
           <div class="fiveDay">
             <div class="dayOne">
+              <img class="dayOneIcon" src="">
+              <p class="dayOneDes"></p>
               <h6 class="date"></h6>
               <h6>Temp:</h6>
               <h6>Wind:</h6>
               <h6>Humidity:</h6>
             </div>
             <div class="dayTwo">
+              <img class="dayTwoIcon" src="">
+              <p class="dayTwoDes"></p>
               <h6 class="date"></h6>
               <h6>Temp:</h6>
               <h6>Wind:</h6>
               <h6>Humidity:</h6>
             </div>
             <div class="dayThree">
+              <img class="dayThreeIcon" src="">
+              <p class="dayThreeDes"></p>
               <h6 class="date"></h6>
               <h6>Temp:</h6>
               <h6>Wind:</h6>
               <h6>Humidity:</h6>
             </div>
             <div class="dayFour">
+              <img class="dayFourIcon" src="">
+              <p class="dayFourDes"></p>
               <h6 class="date"></h6>
               <h6>Temp:</h6>
               <h6>Wind:</h6>
               <h6>Humidity:</h6>
             </div>
             <div class="dayFive">
+              <img class="dayFiveIcon" src="">
+              <p class="dayFiveDes"></p>
               <h6 class="date"></h6>
               <h6>Temp:</h6>
               <h6>Wind:</h6>
@@ -66,6 +85,7 @@
         <section class="citySearch">
           <h2 class="search">Search for a City:</h2>
           <input id="cityInput" type="text" placeholder="City Name Here""/>
+          <input id="stateInput" type="text" placeholder="State Abbr. (optional)""/>
           <label for="unitDrop">Choose prefered Units:</label>
 
           <select name="unit" id="unit">
