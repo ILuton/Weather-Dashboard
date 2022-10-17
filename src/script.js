@@ -8,12 +8,14 @@ const cityInput = document.querySelector("#cityInput");
 const citySearch = document.querySelector(".citySearch");
 const units = document.querySelector("#unit");
 const searchBtn = document.querySelector(".searchBtn");
-const fiveDayEL = document.querySelector(".fiveDay")
+const fiveDayEL = document.querySelector(".fiveDay");
 const weatherIconEl = document.querySelector(".weatherIcon");
 const weatherDesEl = document.querySelector(".weatherDes");
 const stateInputEl = document.querySelector("#stateInput");
 const cityAppend = document.querySelector(".cityAppend");
 const cityEvent = document.querySelectorAll(".cityAppend li");
+const cityBackground = document.querySelector(".currentCity");
+const clear = "./images/clear.jpeg";
 let cities = [];
 let fiveDayApi;
 
@@ -89,9 +91,56 @@ const callTwo = (data) => {
       } else {
         uvIndexData.style.backgroundColor = "red";
       }
-      console.log(dataTwo)
-      fiveDayInfo(dataTwo)
+      generateImage(dataTwo);
+      fiveDayInfo(dataTwo);
     });
+};
+
+// loop through object and get data
+
+const fiveDayInfo = (data) => {
+  while (fiveDayEL.hasChildNodes()) {
+    fiveDayEL.removeChild(fiveDayEL.lastChild)
+  }
+  
+  for (let day in data.daily) {
+    if (day > 0 && day < 6) {
+      fiveDivs(data.daily[day]);
+    }
+  }
+};
+
+// create div boxes
+
+const fiveDivs = (day) => {
+
+
+
+  const dayBox = document.createElement("div");
+  const dayIcon = document.createElement("img");
+  const dayWeather = document.createElement("h6");
+  const dayDate = document.createElement("h6");
+  const dayTemp = document.createElement("h6");
+  const dayWind = document.createElement("h6");
+  const dayHumidity = document.createElement("h6");
+
+  fiveDayEL.append(dayBox);
+
+  dayBox.appendChild(dayDate);
+  dayBox.appendChild(dayIcon);
+  dayBox.appendChild(dayWeather);
+  dayBox.appendChild(dayTemp);
+  dayBox.appendChild(dayWind);
+  dayBox.appendChild(dayHumidity);
+
+
+  dayIcon.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
+  let date = new Date(day.dt * 1000);
+  dayDate.innerHTML = date.toDateString();
+  dayWeather.innerHTML = day.weather[0].main;
+  dayTemp.innerHTML = `Temp: ${day.temp.day}`;
+  dayWind.innerHTML = `Wind: ${day.wind_speed}`;
+  dayHumidity.innerHTML = `Humidity: ${day.humidity}`;
 };
 
 // save information to local storage
@@ -109,74 +158,69 @@ const saveToLocal = (cityName) => {
   localStorage.setItem("storedCity", JSON.stringify(cities));
 };
 
+// switch for which background to generate base on description
 
-// initalize action 
+const generateImage = (data) => {
+  if (data.current.weather[0].description === "clear sky") {
+    cityBackground.style.backgroundImage = "url('./images/clear.jpeg')";
+    cityBackground.style.backgroundRepeat = "no-repeat";
+    cityBackground.style.backgroundSize = "cover";
+  } else if (data.current.weather[0].description === "few clouds") {
+    cityBackground.style.backgroundImage = "url('./images/clouds.jpeg')";
+    cityBackground.style.backgroundRepeat = "no-repeat";
+    cityBackground.style.backgroundSize = "cover";
+  } else if (
+    data.current.weather[0].description === "scattered clouds" ||
+    data.current.weather[0].description === "broken clouds"
+  ) {
+    cityBackground.style.backgroundImage =
+      "url('./images/scatteredClouds.jpeg')";
+    cityBackground.style.backgroundRepeat = "no-repeat";
+    cityBackground.style.backgroundSize = "cover";
+  } else if (
+    data.current.weather[0].description === "shower rain" ||
+    data.current.weather[0].description === "rain" ||
+    data.current.weather[0].description === "mist"
+  ) {
+    cityBackground.style.backgroundImage = "url('./images/rain.jpeg')";
+    cityBackground.style.backgroundRepeat = "no-repeat";
+    cityBackground.style.backgroundSize = "cover";
+  } else if (data.current.weather[0].description === "thunderstorm") {
+    cityBackground.style.backgroundImage = "url('./images/lightning.jpeg')";
+    cityBackground.style.backgroundRepeat = "no-repeat";
+    cityBackground.style.backgroundSize = "cover";
+  } else if (data.current.weather[0].description === "snow") {
+    cityBackground.style.backgroundImage = "url('./images/snow.jpeg')";
+    cityBackground.style.backgroundRepeat = "no-repeat";
+    cityBackground.style.backgroundSize = "cover";
+  } else {
+    cityBackground.style.backgroundImage = "url('./images/clouds.jpeg')";
+    cityBackground.style.backgroundRepeat = "no-repeat";
+    cityBackground.style.backgroundSize = "cover";
+  }
+};
+// initalize action
 searchBtn.addEventListener("click", function () {
   fiveDayApiCallValues(cityInput.value, stateInputEl.value);
-})
+});
 
+// saveToLocal(data.city.name);
 
-// loop through object and get data
+// while (cityAppend.hasChildNodes()) {
+//   cityAppend.removeChild(cityAppend.lastChild);
+// }
 
-const fiveDayInfo = (data) => {
-  for (let day in data.daily){
-    if (day > 0 && day < 6) {
-    fiveDivs(data.daily[day])
-    
-
-    }
-
-  }
-}
-
-// create div boxes
-
-const fiveDivs = (day) => {
-  console.log(day)
-
- const dayBox = document.createElement("div");
- const dayIcon = document.createElement("img");
- const dayDate = document.createElement("h6");
- const dayTemp = document.createElement("h6");
- const dayWind = document.createElement("h6");
- const dayHumidity = document.createElement("h6");
-
- fiveDayEL.append(dayBox)
- dayBox.appendChild(dayIcon)
- dayBox.appendChild(dayDate)
- dayBox.appendChild(dayTemp)
- dayBox.appendChild(dayWind)
- dayBox.appendChild(dayHumidity)
-
- dayIcon.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`
- let date = new Date(day.dt * 1000)
- dayDate.innerHTML = date.toDateString();
- dayTemp.innerHTML = `Temp: ${day.temp.day}`;
- dayWind.innerHTML = `Wind: ${day.wind_speed}`;
- dayHumidity.innerHTML = `Humidity: ${day.humidity}`;
-}
-
-
-
-
-
-  // saveToLocal(data.city.name);
-
-  // while (cityAppend.hasChildNodes()) {
-  //   cityAppend.removeChild(cityAppend.lastChild);
-  // }
-
-  // if (storedCity === null) {
-  //   let listEl = document.createElement("li");
-  //   listEl.textContent = cities;
-  //   cityAppend.appendChild(listEl);
-  // } else {
-  //   for (let i = 0; i < cities.length; i++) {
-  //     let listEl = document.createElement("li");
-  //     listEl.textContent = storedCity[i];
-  //     cityAppend.appendChild(listEl);
-  //   }
-  // }
+// if (storedCity === null) {
+//   let listEl = document.createElement("li");
+//   listEl.textContent = cities;
+//   cityAppend.appendChild(listEl);
+// } else {
+//   for (let i = 0; i < cities.length; i++) {
+//     let listEl = document.createElement("li");
+//     listEl.textContent = storedCity[i];
+//     cityAppend.appendChild(listEl);
+//   }
+// }
 
 // // save search to local storage
 
