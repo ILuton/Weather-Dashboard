@@ -80,7 +80,7 @@ const callTwo = (data) => {
       let iconUrl = dataTwo.current.weather[0].icon;
       weatherIconEl.src = `https://openweathermap.org/img/wn/${iconUrl}@2x.png`;
       weatherDesEl.textContent =
-        dataTwo.current.weather[0].description.toUpperCase();
+        dataTwo.current.weather[0].main.toUpperCase();
 
       if (dataTwo.current.uvi < 2) {
         uvIndexData.style.backgroundColor = "green";
@@ -91,7 +91,7 @@ const callTwo = (data) => {
       } else {
         uvIndexData.style.backgroundColor = "red";
       }
-      generateImage(dataTwo);
+      generateImage(dataTwo, cityBackground);
       fiveDayInfo(dataTwo);
     });
 };
@@ -100,9 +100,9 @@ const callTwo = (data) => {
 
 const fiveDayInfo = (data) => {
   while (fiveDayEL.hasChildNodes()) {
-    fiveDayEL.removeChild(fiveDayEL.lastChild)
+    fiveDayEL.removeChild(fiveDayEL.lastChild);
   }
-  
+
   for (let day in data.daily) {
     if (day > 0 && day < 6) {
       fiveDivs(data.daily[day]);
@@ -113,9 +113,6 @@ const fiveDayInfo = (data) => {
 // create div boxes
 
 const fiveDivs = (day) => {
-
-
-
   const dayBox = document.createElement("div");
   const dayIcon = document.createElement("img");
   const dayWeather = document.createElement("h6");
@@ -133,7 +130,6 @@ const fiveDivs = (day) => {
   dayBox.appendChild(dayWind);
   dayBox.appendChild(dayHumidity);
 
-
   dayIcon.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
   let date = new Date(day.dt * 1000);
   dayDate.innerHTML = date.toDateString();
@@ -141,6 +137,8 @@ const fiveDivs = (day) => {
   dayTemp.innerHTML = `Temp: ${day.temp.day}`;
   dayWind.innerHTML = `Wind: ${day.wind_speed}`;
   dayHumidity.innerHTML = `Humidity: ${day.humidity}`;
+  console.log(day)
+  generateImageDay(day, dayBox)
 };
 
 // save information to local storage
@@ -158,47 +156,73 @@ const saveToLocal = (cityName) => {
   localStorage.setItem("storedCity", JSON.stringify(cities));
 };
 
-// switch for which background to generate base on description
+// switch for which background to generate base on main
 
-const generateImage = (data) => {
-  if (data.current.weather[0].description === "clear sky") {
-    cityBackground.style.backgroundImage = "url('./images/clear.jpeg')";
-    cityBackground.style.backgroundRepeat = "no-repeat";
-    cityBackground.style.backgroundSize = "cover";
-  } else if (data.current.weather[0].description === "few clouds") {
-    cityBackground.style.backgroundImage = "url('./images/clouds.jpeg')";
-    cityBackground.style.backgroundRepeat = "no-repeat";
-    cityBackground.style.backgroundSize = "cover";
-  } else if (
-    data.current.weather[0].description === "scattered clouds" ||
-    data.current.weather[0].description === "broken clouds"
-  ) {
-    cityBackground.style.backgroundImage =
-      "url('./images/scatteredClouds.jpeg')";
-    cityBackground.style.backgroundRepeat = "no-repeat";
-    cityBackground.style.backgroundSize = "cover";
-  } else if (
-    data.current.weather[0].description === "shower rain" ||
-    data.current.weather[0].description === "rain" ||
-    data.current.weather[0].description === "mist"
-  ) {
-    cityBackground.style.backgroundImage = "url('./images/rain.jpeg')";
-    cityBackground.style.backgroundRepeat = "no-repeat";
-    cityBackground.style.backgroundSize = "cover";
-  } else if (data.current.weather[0].description === "thunderstorm") {
-    cityBackground.style.backgroundImage = "url('./images/lightning.jpeg')";
-    cityBackground.style.backgroundRepeat = "no-repeat";
-    cityBackground.style.backgroundSize = "cover";
-  } else if (data.current.weather[0].description === "snow") {
-    cityBackground.style.backgroundImage = "url('./images/snow.jpeg')";
-    cityBackground.style.backgroundRepeat = "no-repeat";
-    cityBackground.style.backgroundSize = "cover";
+const generateImage = (data, element) => {
+  if (data.current.weather[0].main === "Clear") {
+    element.style.backgroundImage = "url('./images/clear.jpeg')";
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "cover";
+  } else if (data.current.weather[0].main === "Clouds") {
+    element.style.backgroundImage = "url('./images/clouds.jpeg')";
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "cover";
+  } else if (data.current.weather[0].main === "Rain") {
+    element.style.backgroundImage = "url('./images/rain.jpeg')";
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "cover";
+  } else if (data.current.weather[0].main === "Drizzle") {
+    element.style.backgroundImage = "url('./images/rain.jpeg')";
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "cover";
+  } else if (data.current.weather[0].main === "Thunderstorm") {
+    element.style.backgroundImage = "url('./images/lightning.jpeg')";
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "cover";
+  } else if (data.current.weather[0].main === "Snow") {
+    element.style.backgroundImage = "url('./images/snow.jpeg')";
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "cover";
   } else {
-    cityBackground.style.backgroundImage = "url('./images/clouds.jpeg')";
-    cityBackground.style.backgroundRepeat = "no-repeat";
-    cityBackground.style.backgroundSize = "cover";
+    element.style.backgroundImage = "url('./images/clouds.jpeg')";
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "cover";
   }
 };
+
+const generateImageDay = (data, element) => {
+  if (data.weather[0].main === "Clear") {
+    element.style.backgroundImage = "url('./images/clear.jpeg')";
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "cover";
+  } else if (data.weather[0].main === "Clouds") {
+    element.style.backgroundImage = "url('./images/clouds.jpeg')";
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "cover";
+  } else if (data.weather[0].main === "Rain") {
+    element.style.backgroundImage = "url('./images/rain.jpeg')";
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "cover";
+  } else if (data.weather[0].main === "Drizzle") {
+    element.style.backgroundImage = "url('./images/rain.jpeg')";
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "cover";
+  } else if (data.weather[0].main === "Thunderstorm") {
+    element.style.backgroundImage = "url('./images/lightning.jpeg')";
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "cover";
+  } else if (data.weather[0].main === "Snow") {
+    element.style.backgroundImage = "url('./images/snow.jpeg')";
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "cover";
+  } else {
+    element.style.backgroundImage = "url('./images/clouds.jpeg')";
+    element.style.backgroundRepeat = "no-repeat";
+    element.style.backgroundSize = "cover";
+  }
+};
+
+
 // initalize action
 searchBtn.addEventListener("click", function () {
   fiveDayApiCallValues(cityInput.value, stateInputEl.value);
