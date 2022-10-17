@@ -20,7 +20,7 @@ let cities = [];
 let fiveDayApi;
 
 // check to see if inputs have value then choose which search to call/ then calls call One
-const fiveDayApiCallValues = (cityValue, stateValue) => {
+const fiveDayApiCallValues = (cityValue = "seattle", stateValue = "WA") => {
   if (!cityValue) {
     return (cityEl.innerHTML = "Please Enter A City");
   } else if (cityValue && stateValue === "null") {
@@ -222,6 +222,8 @@ const generateImageDay = (data, element) => {
   }
 };
 
+
+fiveDayApiCallValues("seattle")
 
 // initalize action
 searchBtn.addEventListener("click", function () {
